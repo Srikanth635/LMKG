@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Knowledge Graph: mug</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style type="text/css">
+        #knowledge-graph {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightgray;
+        }
+        .controls {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .info {
+            background: #f0f8ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007acc;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 15px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005a99;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 Knowledge Graph: mug</h1>
+
+    <div class="info">
+        <strong>SOMA Knowledge Graph Visualization</strong><br>
+        This interactive graph shows the relationships between objects, properties, and concepts
+        in the SOMA ontology. Hover over nodes and edges for more information.
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <strong>27</strong><br>Nodes
+        </div>
+        <div class="stat-item">
+            <strong>30</strong><br>Edges
+        </div>
+        <div class="stat-item">
+            <strong>53</strong><br>Triples
+        </div>
+        <div class="stat-item">
+            <strong>15</strong><br>Instances
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="network.fit()">🔍 Fit to Screen</button>
+        <button onclick="togglePhysics()">⚡ Toggle Physics</button>
+        <button onclick="toggleHierarchy()">📊 Toggle Hierarchy</button>
+        <button onclick="exportImage()">📷 Export Image</button>
+        <button onclick="showNodeInfo()">ℹ️ Node Info</button>
+    </div>
+
+    <div id="knowledge-graph"></div>
+
+    <div class="info">
+        <strong>🎨 Legend:</strong><br>
+        <span style="color: #3498db;">●</span> Instances |
+        <span style="color: #e74c3c;">●</span> Classes |
+        <span style="color: #2ecc71;">●</span> Properties |
+        <span style="color: #f39c12;">●</span> Literals |
+        <span style="color: #9b59b6;">●</span> Affordances
+    </div>
+
+    <div id="node-info" style="margin-top: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; display: none;">
+        <h3>Node Information</h3>
+        <div id="node-details"></div>
+    </div>
+
+    <script type="text/javascript">
+        var nodes = new vis.DataSet([{"id": "http://example.org/instances#mug_20250730_143635_f9053a", "label": "mug_20250730_143635_f9053a", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Container", "label": "Container", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Container", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_color", "label": "mug_20250730_143635_f9053a_color", "color": "#1abc9c", "title": "Type: quality\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_color", "shape": "triangle"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Color", "label": "Color", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Color", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_shape", "label": "mug_20250730_143635_f9053a_shape", "color": "#1abc9c", "title": "Type: quality\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_shape", "shape": "triangle"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#CylinderShape", "label": "CylinderShape", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#CylinderShape", "shape": "diamond"}, {"id": "http://example.org/instances#cupboard_20250730_143635_ec8d61", "label": "cupboard_20250730_143635_ec8d61", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#cupboard_20250730_143635_ec8d61", "shape": "dot"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_material", "label": "mug_20250730_143635_f9053a_material", "color": "#34495e", "title": "Type: material\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_material", "shape": "hexagon"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Material", "label": "Material", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Material", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_material_0", "label": "mug_20250730_143635_f9053a_secondary_material_0", "color": "#34495e", "title": "Type: material\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_secondary_material_0", "shape": "hexagon"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_mass", "label": "mug_20250730_143635_f9053a_mass", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_mass", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#MassAttribute", "label": "MassAttribute", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#MassAttribute", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_temperature", "label": "mug_20250730_143635_f9053a_temperature", "color": "#1abc9c", "title": "Type: quality\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_temperature", "shape": "triangle"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Temperature", "label": "Temperature", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Temperature", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_graspability", "label": "mug_20250730_143635_f9053a_graspability", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_graspability", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Graspability", "label": "Graspability", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Graspability", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_containment", "label": "mug_20250730_143635_f9053a_containment", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_containment", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Containment", "label": "Containment", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Containment", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_0", "label": "mug_20250730_143635_f9053a_secondary_task_0", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_0", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Task", "label": "Task", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Task", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_1", "label": "mug_20250730_143635_f9053a_secondary_task_1", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_1", "shape": "dot"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_activity_0", "label": "mug_20250730_143635_f9053a_activity_0", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_activity_0", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Activity", "label": "Activity", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Activity", "shape": "diamond"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_activity_1", "label": "mug_20250730_143635_f9053a_activity_1", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_activity_1", "shape": "dot"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_activity_2", "label": "mug_20250730_143635_f9053a_activity_2", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_activity_2", "shape": "dot"}, {"id": "http://example.org/instances#mug_20250730_143635_f9053a_cleanliness", "label": "mug_20250730_143635_f9053a_cleanliness", "color": "#3498db", "title": "Type: instance\\nURI: http://example.org/instances#mug_20250730_143635_f9053a_cleanliness", "shape": "dot"}, {"id": "http://www.ease-crc.org/ont/SOMA.owl#Clean", "label": "Clean", "color": "#2ecc71", "title": "Type: property\\nURI: http://www.ease-crc.org/ont/SOMA.owl#Clean", "shape": "diamond"}]);
+        var edges = new vis.DataSet([{"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://www.ease-crc.org/ont/SOMA.owl#Container", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_color", "label": "hasColor", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasColor"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_shape", "label": "hasShape", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasShape"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#cupboard_20250730_143635_ec8d61", "label": "isContainedIn", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#isContainedIn"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_material", "label": "hasMaterial", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasMaterial"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_material_0", "label": "hasSecondaryMaterial", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasSecondaryMaterial"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_mass", "label": "hasMassAttribute", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasMassAttribute"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_temperature", "label": "hasTemperature", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasTemperature"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_graspability", "label": "hasCapability", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasCapability"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_containment", "label": "hasCapability", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasCapability"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_0", "label": "affordsSecondaryTask", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#affordsSecondaryTask"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_1", "label": "affordsSecondaryTask", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#affordsSecondaryTask"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_activity_0", "label": "associatedWithActivity", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#associatedWithActivity"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_activity_1", "label": "associatedWithActivity", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#associatedWithActivity"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_activity_2", "label": "associatedWithActivity", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#associatedWithActivity"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a", "to": "http://example.org/instances#mug_20250730_143635_f9053a_cleanliness", "label": "hasQuality", "arrows": "to", "title": "http://www.ease-crc.org/ont/SOMA.owl#hasQuality"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_color", "to": "http://www.ease-crc.org/ont/SOMA.owl#Color", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_shape", "to": "http://www.ease-crc.org/ont/SOMA.owl#CylinderShape", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_material", "to": "http://www.ease-crc.org/ont/SOMA.owl#Material", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_material_0", "to": "http://www.ease-crc.org/ont/SOMA.owl#Material", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_mass", "to": "http://www.ease-crc.org/ont/SOMA.owl#MassAttribute", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_temperature", "to": "http://www.ease-crc.org/ont/SOMA.owl#Temperature", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_graspability", "to": "http://www.ease-crc.org/ont/SOMA.owl#Graspability", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_containment", "to": "http://www.ease-crc.org/ont/SOMA.owl#Containment", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_0", "to": "http://www.ease-crc.org/ont/SOMA.owl#Task", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_secondary_task_1", "to": "http://www.ease-crc.org/ont/SOMA.owl#Task", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_activity_0", "to": "http://www.ease-crc.org/ont/SOMA.owl#Activity", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_activity_1", "to": "http://www.ease-crc.org/ont/SOMA.owl#Activity", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_activity_2", "to": "http://www.ease-crc.org/ont/SOMA.owl#Activity", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}, {"from": "http://example.org/instances#mug_20250730_143635_f9053a_cleanliness", "to": "http://www.ease-crc.org/ont/SOMA.owl#Clean", "label": "type", "arrows": "to", "title": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}]);
+        var container = document.getElementById('knowledge-graph');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+
+        var options = {
+            nodes: {
+                font: {
+                    size: 12,
+                    color: '#000000'
+                },
+                borderWidth: 2,
+                shadow: true
+            },
+            edges: {
+                width: 2,
+                color: {inherit: 'from'},
+                smooth: {
+                    type: 'continuous'
+                },
+                font: {
+                    size: 10,
+                    align: 'middle'
+                },
+                arrows: {
+                    to: {scaleFactor: 1.2}
+                }
+            },
+            physics: {
+                stabilization: false,
+                barnesHut: {
+                    gravitationalConstant: -80000,
+                    springConstant: 0.001,
+                    springLength: 200
+                }
+            },
+            interaction: {
+                tooltipDelay: 200,
+                hover: true
+            },
+            layout: {
+                improvedLayout: true
+            }
+        };
+
+        var network = new vis.Network(container, data, options);
+        var physicsEnabled = true;
+        var hierarchyEnabled = false;
+        var selectedNode = null;
+
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            network.setOptions({physics: physicsEnabled});
+        }
+
+        function toggleHierarchy() {
+            hierarchyEnabled = !hierarchyEnabled;
+            if (hierarchyEnabled) {
+                network.setOptions({
+                    layout: {
+                        hierarchical: {
+                            direction: 'UD',
+                            sortMethod: 'directed'
+                        }
+                    }
+                });
+            } else {
+                network.setOptions({
+                    layout: {
+                        hierarchical: false
+                    }
+                });
+            }
+        }
+
+        function exportImage() {
+            var canvas = network.body.container.getElementsByTagName('canvas')[0];
+            var dataURL = canvas.toDataURL();
+            var link = document.createElement('a');
+            link.download = 'soma_knowledge_graph.png';
+            link.href = dataURL;
+            link.click();
+        }
+
+        function showNodeInfo() {
+            if (selectedNode) {
+                var nodeData = nodes.get(selectedNode);
+                var nodeInfo = document.getElementById('node-info');
+                var nodeDetails = document.getElementById('node-details');
+
+                nodeDetails.innerHTML = `
+                    <strong>Label:</strong> ${nodeData.label}<br>
+                    <strong>ID:</strong> ${nodeData.id}<br>
+                    <strong>Type:</strong> ${nodeData.title}<br>
+                `;
+                nodeInfo.style.display = 'block';
+            } else {
+                alert('Please select a node first by clicking on it.');
+            }
+        }
+
+        // Event listeners
+        network.on("click", function (params) {
+            if (params.nodes.length > 0) {
+                selectedNode = params.nodes[0];
+                console.log('Selected node:', selectedNode);
+            } else {
+                selectedNode = null;
+                document.getElementById('node-info').style.display = 'none';
+            }
+        });
+
+        network.on("doubleClick", function (params) {
+            if (params.nodes.length > 0) {
+                showNodeInfo();
+            }
+        });
+
+        network.on("stabilizationIterationsDone", function () {
+            network.setOptions({physics: false});
+        });
+
+        // Initialize
+        network.fit();
+    </script>
+</body>
+</html>
+        

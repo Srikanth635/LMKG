@@ -1,0 +1,31 @@
+# Core dependencies
+pydantic>=2.0.0,<3.0.0
+networkx>=3.0
+python-dotenv>=1.0.0
+
+# CLI and Rich Output
+click>=8.0.0
+rich>=13.0.0
+
+# Optional LangGraph and LangChain (for LLM features)
+# Uncomment if you want full LLM capabilities:
+# langgraph>=0.0.40
+# langchain-core>=0.1.0
+# langchain-openai>=0.0.8
+
+# Optional visualization dependencies
+# Uncomment if you want graph visualizations:
+# matplotlib>=3.7.0
+# lxml>=4.9.0
+
+# Development and testing (optional)
+# pytest>=7.0.0
+# pytest-asyncio>=0.21.0
+# black>=23.0.0
+# flake8>=6.0.0
+
+# Jupyter support (optional)
+# ipython>=8.0.0
+# jupyter>=1.0.0
+# pandas>=2.0.0
+# ipywidgets>=8.0.0

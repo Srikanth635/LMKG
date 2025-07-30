@@ -1,0 +1,29 @@
+{
+  "session_id": "analysis_mug_20250730_143635",
+  "timestamp": "20250730_143635",
+  "object_name": "mug",
+  "export_formats": [
+    "json",
+    "html",
+    "markdown",
+    "knowledge_graph"
+  ],
+  "exported_files": [
+    "object_description_mug.json",
+    "analysis_report_mug.html",
+    "summary_mug.md",
+    "knowledge_graph_mug.ttl"
+  ],
+  "metadata": {
+    "analysis_timestamp": "2025-07-30T14:36:35.235073",
+    "model_used": "gpt-4",
+    "validation_passed": true,
+    "validation_errors": 0,
+    "estimated_volume": 502654.39999999997,
+    "capability_count": 2
+  },
+  "system_info": {
+    "version": "0.1.0",
+    "export_time": "2025-07-30T14:36:35.240773"
+  }
+}
