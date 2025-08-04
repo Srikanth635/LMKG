@@ -16,7 +16,7 @@ def example_1_basic_analysis():
     system = SOMAObjectAnalysisSystem(use_mock=False)  # Using mock for this example
 
     # Analyze an object
-    description = "pick up the black mug from the cupboard"
+    description = "pick up the blue mug from the cupboard /nothink"
     result = system.analyze_object_sync(description)
 
     if result["success"]:

@@ -1,0 +1,27 @@
+{
+  "session_id": "analysis_blue_mug_20250804_213611",
+  "timestamp": "20250804_213611",
+  "object_name": "Blue Mug",
+  "export_formats": [
+    "json",
+    "html",
+    "markdown",
+    "knowledge_graph"
+  ],
+  "exported_files": [
+    "object_description_blue_mug.json",
+    "analysis_report_blue_mug.html",
+    "summary_blue_mug.md",
+    "knowledge_graph_blue_mug.ttl"
+  ],
+  "metadata": {
+    "analysis_timestamp": "2025-08-04T21:36:11.531271",
+    "mode": "mock",
+    "template_used": "mug",
+    "confidence_note": "Mock analysis - not from real LLM"
+  },
+  "system_info": {
+    "version": "0.1.0",
+    "export_time": "2025-08-04T21:36:11.537312"
+  }
+}

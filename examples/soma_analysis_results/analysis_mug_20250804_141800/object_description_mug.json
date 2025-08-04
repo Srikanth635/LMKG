@@ -1,0 +1,146 @@
+{
+  "object_analysis": {
+    "name": "mug",
+    "description": "A black mug stored in a cupboard, ready to be picked up",
+    "visual": {
+      "colors": {
+        "primary_color": "black",
+        "rgb": {
+          "r": 10,
+          "g": 10,
+          "b": 10
+        },
+        "hsv": null,
+        "secondary_colors": [],
+        "color_pattern": null
+      },
+      "surface": {
+        "texture": "matte",
+        "finish": "glossy",
+        "transparency": 0.0,
+        "reflectivity": null,
+        "pattern": null
+      },
+      "aesthetic_design": null,
+      "visual_features": []
+    },
+    "geometric": {
+      "shape": {
+        "primary_shape": "CylinderShape",
+        "dimensions": {
+          "width": 8.0,
+          "height": 9.0,
+          "depth": 8.0,
+          "length": null,
+          "radius": 4.0
+        },
+        "shape_parameters": {},
+        "complex_geometry": null
+      },
+      "pose": null,
+      "spatial_relations": {
+        "supported_by": [],
+        "supports": [],
+        "contained_in": [
+          "cupboard"
+        ],
+        "contains": [],
+        "adjacent_to": []
+      },
+      "bounding_box": null
+    },
+    "material": {
+      "primary_material": "ceramic",
+      "secondary_materials": [
+        "glass",
+        "metal"
+      ],
+      "mass": 0.35,
+      "density": null,
+      "hardness": null,
+      "temperature": 22.0
+    },
+    "mechanical": {
+      "static_friction": null,
+      "kinetic_friction": null,
+      "max_force": null,
+      "elasticity": null,
+      "fragility": null
+    },
+    "capabilities": {
+      "functional_affordances": {
+        "can_cut": null,
+        "can_contain": null,
+        "can_support": null,
+        "can_pour": null,
+        "can_grasp": null,
+        "can_operate": null,
+        "pourable": null,
+        "graspability": null
+      },
+      "task_affordances": {
+        "primary_tasks": [],
+        "secondary_tasks": [],
+        "requires_tools": [],
+        "enables_tasks": []
+      },
+      "capabilities": [],
+      "limitations": []
+    },
+    "semantic": {
+      "category": "Container",
+      "subcategories": [
+        "DrinkContainer",
+        "HotDrinkContainer"
+      ],
+      "roles": {
+        "agent_roles": [],
+        "patient_roles": [],
+        "instrument_roles": [],
+        "location_roles": []
+      },
+      "context": {
+        "typical_locations": [
+          "kitchen",
+          "bathroom"
+        ],
+        "associated_activities": [
+          "drinking",
+          "brewing",
+          "washing"
+        ],
+        "cultural_significance": null,
+        "safety_considerations": [],
+        "maintenance_requirements": []
+      },
+      "synonyms": []
+    },
+    "state": {
+      "device_state": null,
+      "cleanliness": "Clean",
+      "integrity": 1.0,
+      "functional_state": "Functional",
+      "temporal_properties": {}
+    },
+    "confidence_score": 0.8,
+    "source": "langgraph_gpt-4",
+    "timestamp": "2025-08-04T14:18:00.091352"
+  },
+  "knowledge_graph": {
+    "turtle": "@prefix soma: <http://www.ease-crc.org/ont/SOMA.owl#> .\n@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .\n@prefix instance: <http://example.org/instances#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\ninstance:mug_20250804_141800_7d5e3c rdf:type soma:Container .\ninstance:mug_20250804_141800_7d5e3c soma:hasName \"mug\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasDescription \"A black mug stored in a cupboard, ready to be picked up\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasConfidenceScore \"0.8\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c soma:hasTimestamp \"2025-08-04T14:18:00.091352\" .\ninstance:mug_20250804_141800_7d5e3c_color rdf:type soma:Color .\ninstance:mug_20250804_141800_7d5e3c_color soma:hasColorValue \"black\" .\ninstance:mug_20250804_141800_7d5e3c_color soma:hasRGBValue \"10,10,10\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasColor instance:mug_20250804_141800_7d5e3c_color .\ninstance:mug_20250804_141800_7d5e3c_shape rdf:type soma:CylinderShape .\ninstance:mug_20250804_141800_7d5e3c_shape soma:hasWidth \"8.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c_shape soma:hasHeight \"9.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c_shape soma:hasDepth \"8.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c_shape soma:hasRadius \"4.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c_shape soma:hasVolume \"576.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c soma:hasShape instance:mug_20250804_141800_7d5e3c_shape .\ninstance:mug_20250804_141800_7d5e3c soma:isContainedIn instance:cupboard_20250804_141800_1b4ea9 .\ninstance:mug_20250804_141800_7d5e3c_material rdf:type soma:Material .\ninstance:mug_20250804_141800_7d5e3c_material soma:hasMaterialtype \"ceramic\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasMaterial instance:mug_20250804_141800_7d5e3c_material .\ninstance:mug_20250804_141800_7d5e3c_secondary_material_0 rdf:type soma:Material .\ninstance:mug_20250804_141800_7d5e3c_secondary_material_0 soma:hasMaterialtype \"glass\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasSecondaryMaterial instance:mug_20250804_141800_7d5e3c_secondary_material_0 .\ninstance:mug_20250804_141800_7d5e3c_secondary_material_1 rdf:type soma:Material .\ninstance:mug_20250804_141800_7d5e3c_secondary_material_1 soma:hasMaterialtype \"metal\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasSecondaryMaterial instance:mug_20250804_141800_7d5e3c_secondary_material_1 .\ninstance:mug_20250804_141800_7d5e3c_mass rdf:type soma:MassAttribute .\ninstance:mug_20250804_141800_7d5e3c_mass soma:hasMassValue \"0.35\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c soma:hasMassAttribute instance:mug_20250804_141800_7d5e3c_mass .\ninstance:mug_20250804_141800_7d5e3c_temperature rdf:type soma:Temperature .\ninstance:mug_20250804_141800_7d5e3c_temperature soma:hasTemperatureValue \"22.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:mug_20250804_141800_7d5e3c soma:hasTemperature instance:mug_20250804_141800_7d5e3c_temperature .\ninstance:mug_20250804_141800_7d5e3c soma:hasSubcategory_0 \"DrinkContainer\" .\ninstance:mug_20250804_141800_7d5e3c soma:hasSubcategory_1 \"HotDrinkContainer\" .\ninstance:mug_20250804_141800_7d5e3c_location_0 rdf:type soma:Location .\ninstance:mug_20250804_141800_7d5e3c_location_0 soma:hasLocationname \"kitchen\" .\ninstance:mug_20250804_141800_7d5e3c soma:typicallyFoundAt instance:mug_20250804_141800_7d5e3c_location_0 .\ninstance:mug_20250804_141800_7d5e3c_location_1 rdf:type soma:Location .\ninstance:mug_20250804_141800_7d5e3c_location_1 soma:hasLocationname \"bathroom\" .\ninstance:mug_20250804_141800_7d5e3c soma:typicallyFoundAt instance:mug_20250804_141800_7d5e3c_location_1 .\ninstance:mug_20250804_141800_7d5e3c_activity_0 rdf:type soma:Activity .\ninstance:mug_20250804_141800_7d5e3c_activity_0 soma:hasActivityname \"drinking\" .\ninstance:mug_20250804_141800_7d5e3c soma:associatedWithActivity instance:mug_20250804_141800_7d5e3c_activity_0 .\ninstance:mug_20250804_141800_7d5e3c_activity_1 rdf:type soma:Activity .\ninstance:mug_20250804_141800_7d5e3c_activity_1 soma:hasActivityname \"brewing\" .\ninstance:mug_20250804_141800_7d5e3c soma:associatedWithActivity instance:mug_20250804_141800_7d5e3c_activity_1 .\ninstance:mug_20250804_141800_7d5e3c_activity_2 rdf:type soma:Activity .\ninstance:mug_20250804_141800_7d5e3c_activity_2 soma:hasActivityname \"washing\" .\ninstance:mug_20250804_141800_7d5e3c soma:associatedWithActivity instance:mug_20250804_141800_7d5e3c_activity_2 .\ninstance:mug_20250804_141800_7d5e3c_cleanliness rdf:type soma:Clean .\ninstance:mug_20250804_141800_7d5e3c soma:hasQuality instance:mug_20250804_141800_7d5e3c_cleanliness .\ninstance:mug_20250804_141800_7d5e3c soma:hasFunctionalState \"Functional\" .\n",
+    "available": true
+  },
+  "metadata": {
+    "analysis_timestamp": "2025-08-04T14:18:00.091352",
+    "model_used": "gpt-4",
+    "validation_passed": false,
+    "validation_errors": 1,
+    "estimated_volume": 576.0,
+    "capability_count": 0
+  },
+  "export_info": {
+    "format": "json",
+    "version": "1.0",
+    "exporter": "JSONExporter"
+  }
+}

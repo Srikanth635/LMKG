@@ -6,7 +6,7 @@ from .base_agent import BaseAgent, AnalysisAgent, ValidationAgent, AgentState
 
 # Import agents based on availability
 try:
-    from .analysis_agent import LangGraphAnalysisAgent
+    from .async_analysis_agent import LangGraphAnalysisAgent
     LANGGRAPH_AVAILABLE = True
 except ImportError:
     LANGGRAPH_AVAILABLE = False

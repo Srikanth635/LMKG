@@ -1,5 +1,5 @@
 """
-LangGraph-based object analysis agent (synchronous version)
+LangGraph-based object analysis agent
 """
 
 from datetime import datetime
@@ -41,11 +41,11 @@ class LangGraphAnalysisAgent(AnalysisAgent):
             #     max_tokens=config.MAX_TOKENS
             # )
             # self.structured_llm = self.llm.with_structured_output(ObjectDescription)
-            self.llm = ChatOllama(model="qwen3:8b", temperature=0.4)
-            self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
+            # self.llm = ChatOllama(model="qwen3:8b", temperature=0.4)
+            # self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
 
-            # self.llm = GcpChatOllama(model="qwen3:14b", temperature=0.4)
-            # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
+            self.llm = GcpChatOllama(model="qwen3:14b", temperature=0.4)
+            self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
 
             self.logger.info(f"Initialized LLM: {self.model_name}")
         except Exception as e:
@@ -74,7 +74,7 @@ class LangGraphAnalysisAgent(AnalysisAgent):
         self.graph = workflow.compile()
         self.logger.info("LangGraph workflow built successfully")
 
-    def _analyze_object_node(self, state: AgentState) -> AgentState:
+    async def _analyze_object_node(self, state: AgentState) -> AgentState:
         """Node: Analyze object using structured output"""
         self.logger.info(f"Analyzing object: {state.input_description[:50]}...")
 
@@ -86,10 +86,8 @@ class LangGraphAnalysisAgent(AnalysisAgent):
                 HumanMessage(content=f"Analyze this object: {state.input_description}")
             ]
 
-            # message = system_prompt + "\n\n" + f"Analyze this object: {state.input_description}"
-
-            # Get structured output (synchronous)
-            result = self.structured_llm.invoke(messages)
+            # Get structured output
+            result = await self.structured_llm.ainvoke(messages)
             print("Object Analysis: ", result)
             state.object_analysis = result
             state.metadata["analysis_timestamp"] = datetime.now().isoformat()
@@ -104,7 +102,7 @@ class LangGraphAnalysisAgent(AnalysisAgent):
             self.logger.error(error_msg)
             return state
 
-    def _validate_analysis_node(self, state: AgentState) -> AgentState:
+    async def _validate_analysis_node(self, state: AgentState) -> AgentState:
         """Node: Validate the analysis results"""
         if not state.object_analysis:
             error_msg = "No analysis to validate"
@@ -137,7 +135,7 @@ class LangGraphAnalysisAgent(AnalysisAgent):
 
         return state
 
-    def _enrich_analysis_node(self, state: AgentState) -> AgentState:
+    async def _enrich_analysis_node(self, state: AgentState) -> AgentState:
         """Node: Enrich analysis with additional information"""
         if not state.object_analysis:
             return state
@@ -168,8 +166,8 @@ class LangGraphAnalysisAgent(AnalysisAgent):
 
         return state
 
-    def process(self, state: AgentState) -> AgentState:
-        """Process the agent state using LangGraph (synchronous)"""
+    async def process(self, state: AgentState) -> AgentState:
+        """Process the agent state using LangGraph"""
         if not self.graph:
             state.errors.append("LangGraph not available")
             return state
@@ -179,7 +177,7 @@ class LangGraphAnalysisAgent(AnalysisAgent):
             return state
 
         try:
-            final_state = self.graph.invoke(state)
+            final_state = await self.graph.ainvoke(state)
             self.logger.info("LangGraph processing completed")
             return final_state
 
@@ -189,10 +187,10 @@ class LangGraphAnalysisAgent(AnalysisAgent):
             self.logger.error(error_msg)
             return state
 
-    def analyze(self, input_description: str) -> dict:
-        """Main analysis method (synchronous)"""
+    async def analyze(self, input_description: str) -> dict:
+        """Main analysis method"""
         initial_state = AgentState(input_description=input_description)
-        final_state = self.process(initial_state)
+        final_state = await self.process(initial_state)
 
         if isinstance(final_state, dict):
             return {
