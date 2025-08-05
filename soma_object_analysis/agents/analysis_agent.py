@@ -18,6 +18,7 @@ from .base_agent import AnalysisAgent, AgentState
 from ..models import ObjectDescription
 from ..config import config
 from ..gcp_ollama import GcpChatOllama
+from ..trails_gcp_ollama import ChatGCPOllama
 
 class LangGraphAnalysisAgent(AnalysisAgent):
     """LangGraph agent for structured object analysis"""
@@ -41,11 +42,14 @@ class LangGraphAnalysisAgent(AnalysisAgent):
             #     max_tokens=config.MAX_TOKENS
             # )
             # self.structured_llm = self.llm.with_structured_output(ObjectDescription)
-            self.llm = ChatOllama(model="qwen3:8b", temperature=0.4)
-            self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
+            # self.llm = ChatOllama(model="qwen3:8b", temperature=0.4)
+            # self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
 
             # self.llm = GcpChatOllama(model="qwen3:14b", temperature=0.4)
             # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
+
+            self.llm = ChatGCPOllama(model="qwen3:14b", temperature=0.4)
+            self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
 
             self.logger.info(f"Initialized LLM: {self.model_name}")
         except Exception as e:
@@ -90,7 +94,7 @@ class LangGraphAnalysisAgent(AnalysisAgent):
 
             # Get structured output (synchronous)
             result = self.structured_llm.invoke(messages)
-            print("Object Analysis: ", result)
+            print("Object Analysis: ", type(result), result)
             state.object_analysis = result
             state.metadata["analysis_timestamp"] = datetime.now().isoformat()
             state.metadata["model_used"] = self.model_name
@@ -193,19 +197,22 @@ class LangGraphAnalysisAgent(AnalysisAgent):
         """Main analysis method (synchronous)"""
         initial_state = AgentState(input_description=input_description)
         final_state = self.process(initial_state)
-
+        print("FINAL STATE : ",type(final_state),final_state)
         if isinstance(final_state, dict):
-            return {
+            out = {
                         "success": len(final_state["errors"]) == 0,
-                        "object_analysis": final_state["object_analysis"].dict() if final_state["object_analysis"] else None,
+                        "object_analysis": final_state["object_analysis"].model_dump() if final_state["object_analysis"] else None,
                         "errors": final_state["errors"],
                         "metadata": final_state["metadata"]
                     }
 
+            return out
+
         else:
-            return {
+            out = {
                 "success": len(final_state.errors) == 0,
                 "object_analysis": final_state.object_analysis.dict() if final_state.object_analysis else None,
                 "errors": final_state.errors,
                 "metadata": final_state.metadata
             }
+            return out

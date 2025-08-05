@@ -1,0 +1,29 @@
+{
+  "session_id": "analysis_wooden_chair_20250805_161227",
+  "timestamp": "20250805_161227",
+  "object_name": "Wooden Chair",
+  "export_formats": [
+    "json",
+    "html",
+    "markdown",
+    "knowledge_graph"
+  ],
+  "exported_files": [
+    "object_description_wooden_chair.json",
+    "analysis_report_wooden_chair.html",
+    "summary_wooden_chair.md",
+    "knowledge_graph_wooden_chair.ttl"
+  ],
+  "metadata": {
+    "analysis_timestamp": "2025-08-05T16:12:27.047481",
+    "model_used": "gpt-4",
+    "validation_passed": true,
+    "validation_errors": 0,
+    "estimated_volume": 0.15300000000000002,
+    "capability_count": 0
+  },
+  "system_info": {
+    "version": "0.1.0",
+    "export_time": "2025-08-05T16:12:27.054259"
+  }
+}

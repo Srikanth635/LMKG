@@ -1,18 +1,22 @@
 import re
 import asyncio
+import typing
+
 import aiohttp
 import requests
 from typing import Optional, List, Any, Dict, Iterator
+
+from langchain_core.language_models import LanguageModelInput
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.callbacks import CallbackManagerForLLMRun, AsyncCallbackManagerForLLMRun
 from langchain_core.messages import BaseMessage, AIMessage, HumanMessage, SystemMessage
 from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_core.runnables import Runnable
 from langchain_core.tools import BaseTool
-from pydantic import Field
+from pydantic import Field, BaseModel
 from typing import Union
-from models import (ObjectDescription, VisualAppearance, GeometricDescription, MaterialProperties, MechanicalProperties,
-                    CapabilityDescription, SemanticDescription, ObjectState)
+# from models import (ObjectDescription, VisualAppearance, GeometricDescription, MaterialProperties, MechanicalProperties,
+#                     CapabilityDescription, SemanticDescription, ObjectState)
 import json
 
 def think_remover(res: str):
@@ -250,64 +254,6 @@ class GcpChatOllama(BaseChatModel):
 
         return ollama_messages
 
-    def get_structured_output(self, messages: List[BaseMessage], schema_class: type) -> Any:
-        """
-        Custom method to get structured output with better error handling
-        """
-        import json
-        from pydantic import ValidationError
-
-        # Get schema info
-        schema = schema_class.model_json_schema()
-        properties = schema.get('properties', {})
-
-        # Create a detailed prompt
-        schema_description = []
-        for prop_name, prop_info in properties.items():
-            prop_type = prop_info.get('type', 'string')
-            schema_description.append(f"'{prop_name}': {prop_type}")
-
-        schema_str = "{" + ", ".join(schema_description) + "}"
-
-        # Add JSON formatting instruction to the last message
-        if messages and hasattr(messages[-1], 'content'):
-            original_content = messages[-1].content
-            json_instruction = f"""
-
-Respond ONLY with valid JSON in this exact format:
-{schema_str}
-
-Do not include any explanation, markdown formatting, or additional text. Just the JSON object."""
-
-            # Create new message with JSON instruction
-            new_messages = messages[:-1] + [type(messages[-1])(content=original_content + json_instruction)]
-        else:
-            new_messages = messages
-
-        # Get response
-        response = self.invoke(new_messages)
-        content = response.content.strip()
-
-        # Clean up response
-        if content.startswith('```json'):
-            content = content[7:]
-        if content.startswith('```'):
-            content = content[3:]
-        if content.endswith('```'):
-            content = content[:-3]
-        content = content.strip()
-
-        # Try to parse JSON
-        try:
-            parsed_data = json.loads(content)
-            return schema_class(**parsed_data)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Failed to parse JSON response: {content}. Error: {e}")
-        except ValidationError as e:
-            raise ValueError(f"Response doesn't match expected schema: {e}")
-        except Exception as e:
-            raise ValueError(f"Unexpected error processing structured output: {e}")
-
     def bind_tools(
             self,
             tools: List[BaseTool],
@@ -319,93 +265,6 @@ Do not include any explanation, markdown formatting, or additional text. Just th
         # For now, return self as we handle structured output differently
         return self
 
-    def with_structured_output(
-            self,
-            schema: type,
-            **kwargs: Any,
-    ) -> Runnable:
-        """
-        Override to use our custom structured output method
-        """
-
-        class StructuredOutputRunnable(Runnable):
-            def __init__(self, llm, schema_class):
-                self.llm = llm
-                self.schema_class = schema_class
-
-            def invoke(self, input_data, config=None, **kwargs):
-                if isinstance(input_data, list):
-                    messages = input_data
-                else:
-                    messages = [HumanMessage(content=str(input_data))]
-                return self.llm.get_structured_output(messages, self.schema_class)
-
-            async def ainvoke(self, input_data, config=None, **kwargs):
-                if isinstance(input_data, list):
-                    messages = input_data
-                else:
-                    messages = [HumanMessage(content=str(input_data))]
-                return await self.llm.aget_structured_output(messages, self.schema_class)
-
-        return StructuredOutputRunnable(self, schema)
-
-    async def aget_structured_output(self, messages: List[BaseMessage], schema_class: type) -> Any:
-        """
-        Async version of get_structured_output
-        """
-        import json
-        from pydantic import ValidationError
-
-        # Get schema info
-        schema = schema_class.model_json_schema()
-        properties = schema.get('properties', {})
-
-        # Create a detailed prompt
-        schema_description = []
-        for prop_name, prop_info in properties.items():
-            prop_type = prop_info.get('type', 'string')
-            schema_description.append(f"'{prop_name}': {prop_type}")
-
-        schema_str = "{" + ", ".join(schema_description) + "}"
-
-        # Add JSON formatting instruction to the last message
-        if messages and hasattr(messages[-1], 'content'):
-            original_content = messages[-1].content
-            json_instruction = f"""
-
-Respond ONLY with valid JSON in this exact format:
-{schema_str}
-
-Do not include any explanation, markdown formatting, or additional text. Just the JSON object."""
-
-            # Create new message with JSON instruction
-            new_messages = messages[:-1] + [type(messages[-1])(content=original_content + json_instruction)]
-        else:
-            new_messages = messages
-
-        # Get response
-        response = await self.ainvoke(new_messages)
-        content = response.content.strip()
-
-        # Clean up response
-        if content.startswith('```json'):
-            content = content[7:]
-        if content.startswith('```'):
-            content = content[3:]
-        if content.endswith('```'):
-            content = content[:-3]
-        content = content.strip()
-
-        # Try to parse JSON
-        try:
-            parsed_data = json.loads(content)
-            return schema_class(**parsed_data)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Failed to parse JSON response: {content}. Error: {e}")
-        except ValidationError as e:
-            raise ValueError(f"Response doesn't match expected schema: {e}")
-        except Exception as e:
-            raise ValueError(f"Unexpected error processing structured output: {e}")
 
 # class GcpChatOllama(BaseChatModel):
 #     """Custom ChatOllama that connects to GCP-hosted Ollama server"""
@@ -1112,13 +971,20 @@ if __name__ == "__main__":
         temperature=0.4
     )
 
+    structured_llm = llm.with_structured_output(Answer,method="json_schema")
+    structured_response = structured_llm.invoke("What is the capital of France? /nothink")
+    print(type(structured_response))
+
+
     # Test basic invoke
-    print("Testing basic invoke...")
-    try:
-        response = llm.invoke("What is the capital of France? /nothink")
-        print("Basic response:", response)
-    except Exception as e:
-        print(f"Error in basic invoke: {e}")
+    # print("Testing basic invoke...")
+    # try:
+    #     response = llm.invoke("What is the capital of France? /nothink")
+    #     print("Basic response:", response)
+    # except Exception as e:
+    #     print(f"Error in basic invoke: {e}")
+
+
 
 
     # try:
@@ -1131,53 +997,53 @@ if __name__ == "__main__":
     #     traceback.print_exc()
 
     # Test with system message
-    print("\nTesting with system message...")
-    try:
-        messages = [
-            SystemMessage(content="You are a helpful assistant that provides concise answers."),
-            HumanMessage(content="What is 2+2? /nothink")
-        ]
-        response = llm.invoke(messages)
-        print("Response with system message:", response.content)
-    except Exception as e:
-        print(f"Error with system message: {e}")
-
-    # Test structured output
-    print("\nTesting structured output...")
-    try:
-        # First test what the raw response looks like
-        # test_response = llm.invoke([
-        #     HumanMessage(
-        #         content="What is 2+2? Please respond in JSON format with 'answer' and 'confidence' fields. Confidence should be a number between 0 and 1.")
-        # ])
-        # print("Raw response for structured output:", repr(test_response.content))
-
-        structured_llm = llm.with_structured_output(Answer, method="json_schema")
-        structured_response = structured_llm.invoke("What is 2+2? /nothink")
-        out = structured_response.model_dump()
-        print("Structured response:", type(out), out)
-        # if hasattr(structured_response, 'answer'):
-        #     print("Answer:", structured_response.answer)
-        #     print("Confidence:", structured_response.confidence)
-    except Exception as e:
-        print(f"Error in structured output: {e}")
-        import traceback
-
-        traceback.print_exc()
-
-    # Test async
-    print("\nTesting async...")
-
-
-    async def async_test():
-        try:
-            response = await llm.ainvoke([HumanMessage(content="What is3*2? /nothink")])
-            print("Async response:", response.content)
-        except Exception as e:
-            print(f"Error in async test: {e}")
-
-
-    asyncio.run(async_test())
+    # print("\nTesting with system message...")
+    # try:
+    #     messages = [
+    #         SystemMessage(content="You are a helpful assistant that provides concise answers."),
+    #         HumanMessage(content="What is 2+2? /nothink")
+    #     ]
+    #     response = llm.invoke(messages)
+    #     print("Response with system message:", response.content)
+    # except Exception as e:
+    #     print(f"Error with system message: {e}")
+    #
+    # # Test structured output
+    # print("\nTesting structured output...")
+    # try:
+    #     # First test what the raw response looks like
+    #     # test_response = llm.invoke([
+    #     #     HumanMessage(
+    #     #         content="What is 2+2? Please respond in JSON format with 'answer' and 'confidence' fields. Confidence should be a number between 0 and 1.")
+    #     # ])
+    #     # print("Raw response for structured output:", repr(test_response.content))
+    #
+    #     structured_llm = llm.with_structured_output(Answer, method="json_schema")
+    #     structured_response = structured_llm.invoke("What is 2+2? /nothink")
+    #     out = structured_response.model_dump()
+    #     print("Structured response:", type(out), out)
+    #     # if hasattr(structured_response, 'answer'):
+    #     #     print("Answer:", structured_response.answer)
+    #     #     print("Confidence:", structured_response.confidence)
+    # except Exception as e:
+    #     print(f"Error in structured output: {e}")
+    #     import traceback
+    #
+    #     traceback.print_exc()
+    #
+    # # Test async
+    # print("\nTesting async...")
+    #
+    #
+    # async def async_test():
+    #     try:
+    #         response = await llm.ainvoke([HumanMessage(content="What is3*2? /nothink")])
+    #         print("Async response:", response.content)
+    #     except Exception as e:
+    #         print(f"Error in async test: {e}")
+    #
+    #
+    # asyncio.run(async_test())
 
 
 

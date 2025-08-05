@@ -1,0 +1,133 @@
+{
+  "object_analysis": {
+    "name": "Blue Mug",
+    "description": "pick up the blue mug from the cupboard /nothink",
+    "visual": {
+      "colors": {
+        "primary_color": "blue",
+        "rgb": {
+          "r": 0,
+          "g": 100,
+          "b": 200
+        },
+        "hsv": null,
+        "secondary_colors": [],
+        "color_pattern": null
+      },
+      "surface": {
+        "texture": "smooth",
+        "finish": "natural",
+        "transparency": null,
+        "reflectivity": null,
+        "pattern": null
+      },
+      "aesthetic_design": null,
+      "visual_features": []
+    },
+    "geometric": {
+      "shape": {
+        "primary_shape": "CylinderShape",
+        "dimensions": {
+          "width": null,
+          "height": 0.1,
+          "depth": null,
+          "length": null,
+          "radius": 0.04
+        },
+        "shape_parameters": {},
+        "complex_geometry": null
+      },
+      "pose": null,
+      "spatial_relations": {
+        "supported_by": [],
+        "supports": [],
+        "contained_in": [],
+        "contains": [],
+        "adjacent_to": []
+      },
+      "bounding_box": null
+    },
+    "material": {
+      "primary_material": "ceramic",
+      "secondary_materials": [],
+      "mass": 0.25,
+      "density": null,
+      "hardness": null,
+      "temperature": null
+    },
+    "mechanical": {
+      "static_friction": null,
+      "kinetic_friction": null,
+      "max_force": null,
+      "elasticity": null,
+      "fragility": null
+    },
+    "capabilities": {
+      "functional_affordances": {
+        "can_cut": false,
+        "can_contain": true,
+        "can_support": null,
+        "can_pour": null,
+        "can_grasp": true,
+        "can_operate": null,
+        "pourable": null,
+        "graspability": 0.85
+      },
+      "task_affordances": {
+        "primary_tasks": [
+          "drinking",
+          "holding_liquids",
+          "coffee"
+        ],
+        "secondary_tasks": [],
+        "requires_tools": [],
+        "enables_tasks": []
+      },
+      "capabilities": [],
+      "limitations": []
+    },
+    "semantic": {
+      "category": "Container",
+      "subcategories": [],
+      "roles": {
+        "agent_roles": [],
+        "patient_roles": [],
+        "instrument_roles": [],
+        "location_roles": []
+      },
+      "context": {
+        "typical_locations": [],
+        "associated_activities": [],
+        "cultural_significance": null,
+        "safety_considerations": [],
+        "maintenance_requirements": []
+      },
+      "synonyms": []
+    },
+    "state": {
+      "device_state": null,
+      "cleanliness": "unknown",
+      "integrity": 1.0,
+      "functional_state": null,
+      "temporal_properties": {}
+    },
+    "confidence_score": 0.85,
+    "source": "mock_agent",
+    "timestamp": "2025-08-05T11:59:12.435590"
+  },
+  "knowledge_graph": {
+    "turtle": "@prefix soma: <http://www.ease-crc.org/ont/SOMA.owl#> .\n@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .\n@prefix instance: <http://example.org/instances#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\ninstance:blue_mug_20250805_115912_a257c6 rdf:type soma:Container .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasName \"Blue Mug\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasDescription \"pick up the blue mug from the cupboard /nothink\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasConfidenceScore \"0.85\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasTimestamp \"2025-08-05T11:59:12.435590\" .\ninstance:blue_mug_20250805_115912_a257c6_color rdf:type soma:BlueColor .\ninstance:blue_mug_20250805_115912_a257c6_color soma:hasRGBValue \"0,100,200\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasColor instance:blue_mug_20250805_115912_a257c6_color .\ninstance:blue_mug_20250805_115912_a257c6_shape rdf:type soma:CylinderShape .\ninstance:blue_mug_20250805_115912_a257c6_shape soma:hasHeight \"0.1\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250805_115912_a257c6_shape soma:hasRadius \"0.04\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250805_115912_a257c6_shape soma:hasVolume \"0.0005026544\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasShape instance:blue_mug_20250805_115912_a257c6_shape .\ninstance:blue_mug_20250805_115912_a257c6_material rdf:type soma:Material .\ninstance:blue_mug_20250805_115912_a257c6_material soma:hasMaterialtype \"ceramic\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasMaterial instance:blue_mug_20250805_115912_a257c6_material .\ninstance:blue_mug_20250805_115912_a257c6_mass rdf:type soma:MassAttribute .\ninstance:blue_mug_20250805_115912_a257c6_mass soma:hasMassValue \"0.25\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasMassAttribute instance:blue_mug_20250805_115912_a257c6_mass .\ninstance:blue_mug_20250805_115912_a257c6_graspability rdf:type soma:Graspability .\ninstance:blue_mug_20250805_115912_a257c6_graspability soma:hasGraspabilityValue \"0.85\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasCapability instance:blue_mug_20250805_115912_a257c6_graspability .\ninstance:blue_mug_20250805_115912_a257c6_containment rdf:type soma:Containment .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasCapability instance:blue_mug_20250805_115912_a257c6_containment .\ninstance:blue_mug_20250805_115912_a257c6 soma:hasCanbegrasped \"True\"^^http://www.w3.org/2001/XMLSchema#integer .\ninstance:blue_mug_20250805_115912_a257c6_primary_task_0 rdf:type soma:Task .\ninstance:blue_mug_20250805_115912_a257c6_primary_task_0 soma:hasTaskname \"drinking\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:affordsTask instance:blue_mug_20250805_115912_a257c6_primary_task_0 .\ninstance:blue_mug_20250805_115912_a257c6_primary_task_1 rdf:type soma:Task .\ninstance:blue_mug_20250805_115912_a257c6_primary_task_1 soma:hasTaskname \"holding_liquids\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:affordsTask instance:blue_mug_20250805_115912_a257c6_primary_task_1 .\ninstance:blue_mug_20250805_115912_a257c6_primary_task_2 rdf:type soma:Task .\ninstance:blue_mug_20250805_115912_a257c6_primary_task_2 soma:hasTaskname \"coffee\" .\ninstance:blue_mug_20250805_115912_a257c6 soma:affordsTask instance:blue_mug_20250805_115912_a257c6_primary_task_2 .\n",
+    "available": true
+  },
+  "metadata": {
+    "analysis_timestamp": "2025-08-05T11:59:12.435604",
+    "mode": "mock",
+    "template_used": "mug",
+    "confidence_note": "Mock analysis - not from real LLM"
+  },
+  "export_info": {
+    "format": "json",
+    "version": "1.0",
+    "exporter": "JSONExporter"
+  }
+}

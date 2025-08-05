@@ -91,7 +91,7 @@ class SOMAObjectAnalysisSystem:
 
         try:
             # Step 1: Object Analysis
-            analysis_result = await self.agent.analyze(description)
+            analysis_result = self.agent.analyze(description)
 
             # if not analysis_result.get("success"):
             #     self.logger.error("Object analysis failed")
@@ -100,7 +100,7 @@ class SOMAObjectAnalysisSystem:
             #         "error": "Object analysis failed",
             #         "details": analysis_result
             #     }
-
+            print("Analysis Results : ", type(analysis_result), analysis_result)
             object_analysis = ObjectDescription(**analysis_result["object_analysis"])
             self.logger.info(f"Analysis completed: {object_analysis.name}")
 

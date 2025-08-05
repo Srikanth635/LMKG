@@ -1,0 +1,158 @@
+{
+  "object_analysis": {
+    "name": "Wooden Chair",
+    "description": "A sturdy wooden chair with a smooth surface and four legs, commonly found in living rooms.",
+    "visual": {
+      "colors": {
+        "primary_color": "brown",
+        "rgb": {
+          "r": 139,
+          "g": 69,
+          "b": 19
+        },
+        "hsv": null,
+        "secondary_colors": [
+          "beige"
+        ],
+        "color_pattern": null
+      },
+      "surface": {
+        "texture": "smooth",
+        "finish": "natural_oil",
+        "transparency": 0.0,
+        "reflectivity": 0.2,
+        "pattern": "none"
+      },
+      "aesthetic_design": "rustic",
+      "visual_features": [
+        "carved legs",
+        "rounded backrest"
+      ]
+    },
+    "geometric": {
+      "shape": {
+        "primary_shape": "BoxShape",
+        "dimensions": {
+          "width": 0.45,
+          "height": 0.85,
+          "depth": 0.4,
+          "length": null,
+          "radius": null
+        },
+        "shape_parameters": {},
+        "complex_geometry": null
+      },
+      "pose": null,
+      "spatial_relations": {
+        "supported_by": [],
+        "supports": [],
+        "contained_in": [],
+        "contains": [],
+        "adjacent_to": []
+      },
+      "bounding_box": {
+        "width": null,
+        "height": null,
+        "depth": null,
+        "length": null,
+        "radius": null
+      }
+    },
+    "material": {
+      "primary_material": "wood",
+      "secondary_materials": [],
+      "mass": 5.5,
+      "density": null,
+      "hardness": null,
+      "temperature": null
+    },
+    "mechanical": {
+      "static_friction": null,
+      "kinetic_friction": null,
+      "max_force": null,
+      "elasticity": 0.3,
+      "fragility": null
+    },
+    "capabilities": {
+      "functional_affordances": {
+        "can_cut": null,
+        "can_contain": null,
+        "can_support": null,
+        "can_pour": null,
+        "can_grasp": null,
+        "can_operate": null,
+        "pourable": null,
+        "graspability": null
+      },
+      "task_affordances": {
+        "primary_tasks": [],
+        "secondary_tasks": [],
+        "requires_tools": [],
+        "enables_tasks": []
+      },
+      "capabilities": [],
+      "limitations": []
+    },
+    "semantic": {
+      "category": "Item",
+      "subcategories": [
+        "furniture",
+        "seating"
+      ],
+      "roles": {
+        "agent_roles": [],
+        "patient_roles": [
+          "supported_object"
+        ],
+        "instrument_roles": [
+          "supporting_tool"
+        ],
+        "location_roles": []
+      },
+      "context": {
+        "typical_locations": [
+          "living_room",
+          "dining_room"
+        ],
+        "associated_activities": [
+          "sitting",
+          "resting"
+        ],
+        "cultural_significance": null,
+        "safety_considerations": [],
+        "maintenance_requirements": []
+      },
+      "synonyms": [
+        "chair",
+        "seat"
+      ]
+    },
+    "state": {
+      "device_state": null,
+      "cleanliness": "unknown",
+      "integrity": 0.95,
+      "functional_state": null,
+      "temporal_properties": {}
+    },
+    "confidence_score": 0.9,
+    "source": "langgraph_gpt-4",
+    "timestamp": "2023-10-05T14:30:00Z"
+  },
+  "knowledge_graph": {
+    "turtle": "@prefix soma: <http://www.ease-crc.org/ont/SOMA.owl#> .\n@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .\n@prefix instance: <http://example.org/instances#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\ninstance:wooden_chair_20250805_161227_6b9653 rdf:type soma:Item .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasName \"Wooden Chair\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasDescription \"A sturdy wooden chair with a smooth surface and four legs, commonly found in living rooms.\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasConfidenceScore \"0.9\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasTimestamp \"2023-10-05T14:30:00Z\" .\ninstance:wooden_chair_20250805_161227_6b9653_color rdf:type soma:Color .\ninstance:wooden_chair_20250805_161227_6b9653_color soma:hasColorValue \"brown\" .\ninstance:wooden_chair_20250805_161227_6b9653_color soma:hasRGBValue \"139,69,19\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasColor instance:wooden_chair_20250805_161227_6b9653_color .\ninstance:wooden_chair_20250805_161227_6b9653_secondary_color_0 rdf:type soma:Color .\ninstance:wooden_chair_20250805_161227_6b9653_secondary_color_0 soma:hasColorValue \"beige\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasSecondaryColor instance:wooden_chair_20250805_161227_6b9653_secondary_color_0 .\ninstance:wooden_chair_20250805_161227_6b9653_shape rdf:type soma:BoxShape .\ninstance:wooden_chair_20250805_161227_6b9653_shape soma:hasWidth \"0.45\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:wooden_chair_20250805_161227_6b9653_shape soma:hasHeight \"0.85\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:wooden_chair_20250805_161227_6b9653_shape soma:hasDepth \"0.4\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:wooden_chair_20250805_161227_6b9653_shape soma:hasVolume \"0.15300000000000002\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasShape instance:wooden_chair_20250805_161227_6b9653_shape .\ninstance:wooden_chair_20250805_161227_6b9653_material rdf:type soma:Material .\ninstance:wooden_chair_20250805_161227_6b9653_material soma:hasMaterialtype \"wood\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasMaterial instance:wooden_chair_20250805_161227_6b9653_material .\ninstance:wooden_chair_20250805_161227_6b9653_mass rdf:type soma:MassAttribute .\ninstance:wooden_chair_20250805_161227_6b9653_mass soma:hasMassValue \"5.5\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasMassAttribute instance:wooden_chair_20250805_161227_6b9653_mass .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasSubcategory_0 \"furniture\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasSubcategory_1 \"seating\" .\ninstance:wooden_chair_20250805_161227_6b9653_location_0 rdf:type soma:Location .\ninstance:wooden_chair_20250805_161227_6b9653_location_0 soma:hasLocationname \"living_room\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:typicallyFoundAt instance:wooden_chair_20250805_161227_6b9653_location_0 .\ninstance:wooden_chair_20250805_161227_6b9653_location_1 rdf:type soma:Location .\ninstance:wooden_chair_20250805_161227_6b9653_location_1 soma:hasLocationname \"dining_room\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:typicallyFoundAt instance:wooden_chair_20250805_161227_6b9653_location_1 .\ninstance:wooden_chair_20250805_161227_6b9653_activity_0 rdf:type soma:Activity .\ninstance:wooden_chair_20250805_161227_6b9653_activity_0 soma:hasActivityname \"sitting\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:associatedWithActivity instance:wooden_chair_20250805_161227_6b9653_activity_0 .\ninstance:wooden_chair_20250805_161227_6b9653_activity_1 rdf:type soma:Activity .\ninstance:wooden_chair_20250805_161227_6b9653_activity_1 soma:hasActivityname \"resting\" .\ninstance:wooden_chair_20250805_161227_6b9653 soma:associatedWithActivity instance:wooden_chair_20250805_161227_6b9653_activity_1 .\ninstance:wooden_chair_20250805_161227_6b9653 soma:hasIntegrityValue \"0.95\"^^http://www.w3.org/2001/XMLSchema#double .\n",
+    "available": true
+  },
+  "metadata": {
+    "analysis_timestamp": "2025-08-05T16:12:27.047481",
+    "model_used": "gpt-4",
+    "validation_passed": true,
+    "validation_errors": 0,
+    "estimated_volume": 0.15300000000000002,
+    "capability_count": 0
+  },
+  "export_info": {
+    "format": "json",
+    "version": "1.0",
+    "exporter": "JSONExporter"
+  }
+}

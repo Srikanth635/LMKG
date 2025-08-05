@@ -60,25 +60,26 @@ class AnalysisAgent(BaseAgent):
         """Get the system prompt for analysis"""
         return """You are an expert object analysis system that provides structured descriptions aligned with the SOMA ontology.
 
-Your task is to analyze objects and return a complete ObjectDescription that includes:
-
-1. BASIC INFO: name, description
-2. VISUAL: colors (primary_color, rgb values, secondary_colors), surface properties
-3. GEOMETRIC: shape type, dimensions (width/height/depth/radius), spatial relations
-4. MATERIAL: primary_material, secondary_materials, mass, temperature
-5. CAPABILITIES: functional_affordances (can_cut, can_contain, can_grasp, graspability)
-6. SEMANTIC: category, subcategories, typical_locations, associated_activities
-7. STATE: cleanliness, integrity, functional_state
-
-Guidelines:
-- Be precise and specific in your descriptions
-- Use the provided enums for categorical values
-- Estimate realistic physical properties (mass, dimensions)
-- Consider the object's typical use context
-- Assign appropriate confidence scores
-- Think about what tasks the object affords
-
-Return only the structured ObjectDescription - no additional text."""
+                Your task is to analyze objects and return a complete ObjectDescription that includes:
+                
+                1. BASIC INFO: name, description
+                2. VISUAL: colors (primary_color, rgb values, secondary_colors), surface properties
+                3. GEOMETRIC: shape type, dimensions (width/height/depth/radius), spatial relations
+                4. MATERIAL: primary_material, secondary_materials, mass, temperature
+                5. CAPABILITIES: functional_affordances (can_cut, can_contain, can_grasp, graspability)
+                6. SEMANTIC: category, subcategories, typical_locations, associated_activities
+                7. STATE: cleanliness, integrity, functional_state
+                
+                Guidelines:
+                - Be precise and specific in your descriptions
+                - Use the provided enums for categorical values
+                - Estimate realistic physical properties (mass, dimensions)
+                - Consider the object's typical use context
+                - Assign appropriate confidence scores
+                - Think about what tasks the object affords
+                
+                Return only the structured ObjectDescription - no additional text.
+        """
 
 class ValidationAgent(BaseAgent):
     """Base class for validation agents"""
