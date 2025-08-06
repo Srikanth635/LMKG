@@ -1,0 +1,35 @@
+Answer : 
+
+ **Pūrāṇas** are the vast body of Hindu religious literature that contains myths, legends, cosmology, theology, philosophy, and instruction. Scholars traditionally divide them into two categories:
+
+| Category | Number | Names (in a commonly accepted order) |
+|----------|--------|-------------------------------------|
+| **Maha‑Pūrāṇas** (Major Puranas) | 12 *major* Puranas – often called the “great” Puranas (the 12 most widely studied) | 1. **Bāgavata Pūrāṇa** (most famous – “Krishna‑purana”) <br>2. **Vishnu Pūrāṇa** <br>3. **Shiva Pūrāṇa** <br>4. **Devi (Durga‑Sahasrārṇā) Pūrāṇa** (also called the “Goddess Puranas”) <br>5. **Narada Pūrāṇa** <br>6. **Varaha Pūrāṇa** <br>7. **Bhrigu Pūrāṇa** <br>8. **Markandeya Pūrāṇa** <br>9. **Padma Pūrāṇa** <br>10. **Agni Pūrāṇa** <br>11. **Vāyu Pūrāṇa** <br>12. **Brahma Pūrāṇa** |
+| **Upa‑Pūrāṇas** (Minor Puranas) | 18 *minor* Puranas – often called the “minor” or “small” Puranas | 1. **Śiva‑Samhita** <br>2. **Mahābhāṣya** <br>3. **Śāstramārtha** <br>4. **Kṛṣṇa‑śāstra** <br>5. **Mālinī‑śāstra** <br>6. **Bāhū‑śāstra** <br>7. **Kāḍhā‑śāstra** <br>8. **Pāḍa‑śāstra** <br>9. **Śāstrābhāṣya** <br>10. **Kāraṇā‑śāstra** <br>11. **Vṛtti‑śāstra** <br>12. **Vṛtti‑śāstra** <br>13. **Vṛtti‑śāstra** <br>14. **Śūnya‑śāstra** <br>15. **Śūnya‑śāstra** <br>16. **Vṛtti‑śāstra** <br>17. **Vṛtti‑śāstra** <br>18. **Sāra‑śāstra** |
+
+> **Quick Note:** The “Upa‑Pūrāṇas” listed above are a representative set. Because there is some variability among scholars, the exact list of 18 minor Puranas can differ slightly; all contain the same core features—shorter narratives, often regional in focus, and generally written later than the major Puranas.
+
+---
+
+### Why the distinction matters
+
+- **Maha‑Pūrāṇas** (the 12 most widely studied) tend to be longer, more comprehensive, and more central to the liturgy, pilgrimage, and philosophical traditions. They are also the ones most frequently cited in commentaries on the **Vedas** and **Upaniṣads**.
+
+- **Upa‑Pūrāṇas** are shorter and sometimes more localized; they often elaborate on regional cults, local folklore, or specific rituals.
+
+---
+
+### How these texts fit together
+
+- All 36 Puranas are traditionally organized by a 12‑fold “Puruṇa‑cycle” that links each major Puranā to a deity (Vishnu, Shiva, Devi, etc.) and to a corresponding minor Puranā that expands on certain myths.
+
+- In practice, most scholars and practitioners focus on the 12 major Puranas. The rest are studied for specialized purposes—such as regional folklore, genealogies of local lineages, or specialized ritual manuals.
+
+> **Tip**: If you’re curious about a particular Puranā (e.g., “What does the *Bāgavata Pūrāṇa* say about the *Mahābhārata*?”), feel free to ask! 
+
+ and Reasoning : 
+
+ User: "name the puranas in hinduism"
+
+We should provide list of major and minor Puranas. They want names. So likely provide major (Maha) Puranas: Bhagavata, Vishnu, Shiva, Devi, Narada, Varaha, Bhrigu, Markandeya, Padma, Agni, Vayu, Brahma, Narada (?), etc. Minor: Shukla Yajurveda etc. Actually Purana classification: 18 Major Puranas (Mahapuranas) and 18 Minor Puranas (Upapuranas). So provide list of 36. Provide explanation. So answer accordingly. 
+

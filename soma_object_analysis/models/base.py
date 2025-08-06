@@ -1,7 +1,3 @@
-"""
-Base enums and types for SOMA object analysis
-"""
-
 from enum import Enum
 
 class ObjectCategory(str, Enum):

@@ -1,0 +1,29 @@
+{
+  "session_id": "analysis_blue_mug_20250806_152331",
+  "timestamp": "20250806_152331",
+  "object_name": "Blue Mug",
+  "export_formats": [
+    "json",
+    "html",
+    "markdown",
+    "knowledge_graph"
+  ],
+  "exported_files": [
+    "object_description_blue_mug.json",
+    "analysis_report_blue_mug.html",
+    "summary_blue_mug.md",
+    "knowledge_graph_blue_mug.ttl"
+  ],
+  "metadata": {
+    "analysis_timestamp": "2025-08-06T15:23:31.243901",
+    "model_used": "gpt-4.1",
+    "validation_passed": false,
+    "validation_errors": 1,
+    "estimated_volume": 0.00064,
+    "capability_count": 2
+  },
+  "system_info": {
+    "version": "0.1.0",
+    "export_time": "2025-08-06T15:23:31.253617"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "object_analysis": {
+    "name": "Blue Mug",
+    "description": "A blue mug typically used for drinking hot beverages such as coffee or tea.",
+    "visual": {
+      "colors": {
+        "primary_color": "blue",
+        "rgb": {
+          "r": 0,
+          "g": 0,
+          "b": 255
+        },
+        "hsv": null,
+        "secondary_colors": [],
+        "color_pattern": null
+      },
+      "surface": {
+        "texture": "smooth",
+        "finish": "glossy",
+        "transparency": 0.0,
+        "reflectivity": 0.2,
+        "pattern": null
+      },
+      "aesthetic_design": null,
+      "visual_features": [
+        "handle"
+      ]
+    },
+    "geometric": {
+      "shape": {
+        "primary_shape": "CylinderShape",
+        "dimensions": {
+          "width": 8.0,
+          "height": 10.0,
+          "depth": null,
+          "length": null,
+          "radius": 4.0
+        },
+        "shape_parameters": {},
+        "complex_geometry": null
+      },
+      "pose": null,
+      "spatial_relations": {
+        "supported_by": [
+          "table",
+          "cupboard shelf"
+        ],
+        "supports": [
+          "liquid"
+        ],
+        "contained_in": [
+          "cupboard"
+        ],
+        "contains": [],
+        "adjacent_to": []
+      },
+      "bounding_box": {
+        "width": 8.0,
+        "height": 10.0,
+        "depth": 8.0,
+        "length": null,
+        "radius": null
+      }
+    },
+    "material": {
+      "primary_material": "ceramic",
+      "secondary_materials": [],
+      "mass": 0.4,
+      "density": null,
+      "hardness": null,
+      "temperature": 20.0
+    },
+    "mechanical": {
+      "static_friction": 0.6,
+      "kinetic_friction": 0.5,
+      "max_force": null,
+      "elasticity": 0.0,
+      "fragility": 0.7
+    },
+    "capabilities": {
+      "functional_affordances": {
+        "can_cut": false,
+        "can_contain": true,
+        "can_support": false,
+        "can_pour": true,
+        "can_grasp": true,
+        "can_operate": false,
+        "pourable": true,
+        "graspability": 0.9
+      },
+      "task_affordances": {
+        "primary_tasks": [
+          "drinking"
+        ],
+        "secondary_tasks": [],
+        "requires_tools": [],
+        "enables_tasks": [
+          "hydration",
+          "enjoyment of beverages"
+        ]
+      },
+      "capabilities": [],
+      "limitations": [
+        "fragile",
+        "not microwave safe"
+      ]
+    },
+    "semantic": {
+      "category": "Container",
+      "subcategories": [
+        "drinkware"
+      ],
+      "roles": {
+        "agent_roles": [],
+        "patient_roles": [
+          "being held",
+          "being filled",
+          "being emptied"
+        ],
+        "instrument_roles": [
+          "containing drinks"
+        ],
+        "location_roles": []
+      },
+      "context": {
+        "typical_locations": [
+          "kitchen",
+          "dining room",
+          "office"
+        ],
+        "associated_activities": [
+          "drinking",
+          "breakfast",
+          "coffee break"
+        ],
+        "cultural_significance": null,
+        "safety_considerations": [
+          "handle with care",
+          "avoid high temperatures"
+        ],
+        "maintenance_requirements": [
+          "wash after use"
+        ]
+      },
+      "synonyms": [
+        "cup",
+        "beverage holder"
+      ]
+    },
+    "state": {
+      "device_state": null,
+      "cleanliness": "Clean",
+      "integrity": 1.0,
+      "functional_state": "functional",
+      "temporal_properties": {}
+    },
+    "confidence_score": 0.9,
+    "source": "langgraph_gpt-4",
+    "timestamp": "2025-08-06T15:03:23.093266"
+  },
+  "knowledge_graph": {
+    "turtle": "@prefix soma: <http://www.ease-crc.org/ont/SOMA.owl#> .\n@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .\n@prefix instance: <http://example.org/instances#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\ninstance:blue_mug_20250806_150323_639997 rdf:type soma:Container .\ninstance:blue_mug_20250806_150323_639997 soma:hasName \"Blue Mug\" .\ninstance:blue_mug_20250806_150323_639997 soma:hasDescription \"A blue mug typically used for drinking hot beverages such as coffee or tea.\" .\ninstance:blue_mug_20250806_150323_639997 soma:hasConfidenceScore \"0.9\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasTimestamp \"2025-08-06T15:03:23.093266\" .\ninstance:blue_mug_20250806_150323_639997_color rdf:type soma:BlueColor .\ninstance:blue_mug_20250806_150323_639997_color soma:hasRGBValue \"0,0,255\" .\ninstance:blue_mug_20250806_150323_639997 soma:hasColor instance:blue_mug_20250806_150323_639997_color .\ninstance:blue_mug_20250806_150323_639997_shape rdf:type soma:CylinderShape .\ninstance:blue_mug_20250806_150323_639997_shape soma:hasWidth \"8.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997_shape soma:hasHeight \"10.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997_shape soma:hasRadius \"4.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997_shape soma:hasVolume \"502.6544\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasShape instance:blue_mug_20250806_150323_639997_shape .\ninstance:blue_mug_20250806_150323_639997 soma:isSupportedBy instance:table_20250806_150323_7e1cec .\ninstance:blue_mug_20250806_150323_639997 soma:isSupportedBy instance:cupboard_shelf_20250806_150323_0e0a19 .\ninstance:blue_mug_20250806_150323_639997 soma:supports instance:liquid_20250806_150323_2401b9 .\ninstance:blue_mug_20250806_150323_639997 soma:isContainedIn instance:cupboard_20250806_150323_127b10 .\ninstance:blue_mug_20250806_150323_639997_material rdf:type soma:Material .\ninstance:blue_mug_20250806_150323_639997_material soma:hasMaterialtype \"ceramic\" .\ninstance:blue_mug_20250806_150323_639997 soma:hasMaterial instance:blue_mug_20250806_150323_639997_material .\ninstance:blue_mug_20250806_150323_639997_mass rdf:type soma:MassAttribute .\ninstance:blue_mug_20250806_150323_639997_mass soma:hasMassValue \"0.4\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasMassAttribute instance:blue_mug_20250806_150323_639997_mass .\ninstance:blue_mug_20250806_150323_639997_temperature rdf:type soma:Temperature .\ninstance:blue_mug_20250806_150323_639997_temperature soma:hasTemperatureValue \"20.0\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasTemperature instance:blue_mug_20250806_150323_639997_temperature .\ninstance:blue_mug_20250806_150323_639997_static_friction rdf:type soma:StaticFrictionAttribute .\ninstance:blue_mug_20250806_150323_639997_static_friction soma:hasFrictionValue \"0.6\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasFrictionAttribute instance:blue_mug_20250806_150323_639997_static_friction .\ninstance:blue_mug_20250806_150323_639997_kinetic_friction rdf:type soma:KineticFrictionAttribute .\ninstance:blue_mug_20250806_150323_639997_kinetic_friction soma:hasFrictionValue \"0.5\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasFrictionAttribute instance:blue_mug_20250806_150323_639997_kinetic_friction .\ninstance:blue_mug_20250806_150323_639997_graspability rdf:type soma:Graspability .\ninstance:blue_mug_20250806_150323_639997_graspability soma:hasGraspabilityValue \"0.9\"^^http://www.w3.org/2001/XMLSchema#double .\ninstance:blue_mug_20250806_150323_639997 soma:hasCapability instance:blue_mug_20250806_150323_639997_graspability .\ninstance:blue_mug_20250806_150323_639997_containment rdf:type soma:Containment .\ninstance:blue_mug_20250806_150323_639997 soma:hasCapability instance:blue_mug_20250806_150323_639997_containment .\ninstance:blue_mug_20250806_150323_639997 soma:hasCanbegrasped \"True\"^^http://www.w3.org/2001/XMLSchema#integer .\ninstance:blue_mug_20250806_150323_639997_primary_task_0 rdf:type soma:Task .\ninstance:blue_mug_20250806_150323_639997_primary_task_0 soma:hasTaskname \"drinking\" .\ninstance:blue_mug_20250806_150323_639997 soma:affordsTask instance:blue_mug_20250806_150323_639997_primary_task_0 .\ninstance:blue_mug_20250806_150323_639997 soma:hasSubcategory_0 \"drinkware\" .\ninstance:blue_mug_20250806_150323_639997_location_0 rdf:type soma:Location .\ninstance:blue_mug_20250806_150323_639997_location_0 soma:hasLocationname \"kitchen\" .\ninstance:blue_mug_20250806_150323_639997 soma:typicallyFoundAt instance:blue_mug_20250806_150323_639997_location_0 .\ninstance:blue_mug_20250806_150323_639997_location_1 rdf:type soma:Location .\ninstance:blue_mug_20250806_150323_639997_location_1 soma:hasLocationname \"dining room\" .\ninstance:blue_mug_20250806_150323_639997 soma:typicallyFoundAt instance:blue_mug_20250806_150323_639997_location_1 .\ninstance:blue_mug_20250806_150323_639997_location_2 rdf:type soma:Location .\ninstance:blue_mug_20250806_150323_639997_location_2 soma:hasLocationname \"office\" .\ninstance:blue_mug_20250806_150323_639997 soma:typicallyFoundAt instance:blue_mug_20250806_150323_639997_location_2 .\ninstance:blue_mug_20250806_150323_639997_activity_0 rdf:type soma:Activity .\ninstance:blue_mug_20250806_150323_639997_activity_0 soma:hasActivityname \"drinking\" .\ninstance:blue_mug_20250806_150323_639997 soma:associatedWithActivity instance:blue_mug_20250806_150323_639997_activity_0 .\ninstance:blue_mug_20250806_150323_639997_activity_1 rdf:type soma:Activity .\ninstance:blue_mug_20250806_150323_639997_activity_1 soma:hasActivityname \"breakfast\" .\ninstance:blue_mug_20250806_150323_639997 soma:associatedWithActivity instance:blue_mug_20250806_150323_639997_activity_1 .\ninstance:blue_mug_20250806_150323_639997_activity_2 rdf:type soma:Activity .\ninstance:blue_mug_20250806_150323_639997_activity_2 soma:hasActivityname \"coffee break\" .\ninstance:blue_mug_20250806_150323_639997 soma:associatedWithActivity instance:blue_mug_20250806_150323_639997_activity_2 .\ninstance:blue_mug_20250806_150323_639997_cleanliness rdf:type soma:Clean .\ninstance:blue_mug_20250806_150323_639997 soma:hasQuality instance:blue_mug_20250806_150323_639997_cleanliness .\ninstance:blue_mug_20250806_150323_639997 soma:hasFunctionalState \"functional\" .\n",
+    "available": true
+  },
+  "metadata": {
+    "analysis_timestamp": "2025-08-06T15:03:23.094475",
+    "model_used": "gpt-4",
+    "validation_passed": true,
+    "validation_errors": 0,
+    "estimated_volume": 502.6544,
+    "capability_count": 2
+  },
+  "export_info": {
+    "format": "json",
+    "version": "1.0",
+    "exporter": "JSONExporter"
+  }
+}

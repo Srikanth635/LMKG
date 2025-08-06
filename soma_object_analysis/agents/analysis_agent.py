@@ -4,6 +4,8 @@ LangGraph-based object analysis agent (synchronous version)
 
 from datetime import datetime
 from typing import Optional
+
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_ollama import ChatOllama
 
 try:
@@ -19,6 +21,7 @@ from ..models import ObjectDescription
 from ..config import config
 from ..gcp_ollama import GcpChatOllama
 from ..trails_gcp_ollama import ChatGCPOllama
+from ..trails_openrouter_ollama import OpenRouterChatModel
 
 class LangGraphAnalysisAgent(AnalysisAgent):
     """LangGraph agent for structured object analysis"""
@@ -37,19 +40,23 @@ class LangGraphAnalysisAgent(AnalysisAgent):
         """Initialize the language model"""
         try:
             # self.llm = ChatOpenAI(
-            #     model=self.model_name,c
-            #     temperature=self.temperature,
-            #     max_tokens=config.MAX_TOKENS
+            #     model=self.model_name,
+            #     # temperature=self.temperature,
+            #     # max_tokens=config.MAX_TOKENS
             # )
-            # self.structured_llm = self.llm.with_structured_output(ObjectDescription)
-            # self.llm = ChatOllama(model="qwen3:8b", temperature=0.4)
-            # self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
+            # self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="function_calling")
+
+            self.llm = ChatOllama(model="gpt-oss:20b", temperature=0.5)
+            self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
 
             # self.llm = GcpChatOllama(model="qwen3:14b", temperature=0.4)
             # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
 
-            self.llm = ChatGCPOllama(model="qwen3:14b", temperature=0.4)
-            self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
+            # self.llm = ChatGCPOllama(model="qwen3:14b", temperature=0.4)
+            # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
+
+            # self.llm = OpenRouterChatModel(model="openai/gpt-oss-20b")
+            # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="function_calling")
 
             self.logger.info(f"Initialized LLM: {self.model_name}")
         except Exception as e:

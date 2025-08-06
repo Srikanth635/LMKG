@@ -16,7 +16,7 @@ class Config:
 
     # API Configuration
     OPENAI_API_KEY: Optional[str] = os.getenv("OPENAI_API_KEY")
-    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gpt-4")
+    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gpt-4.1")
     DEFAULT_TEMPERATURE: float = float(os.getenv("DEFAULT_TEMPERATURE", "0.1"))
     MAX_TOKENS: int = int(os.getenv("MAX_TOKENS", "2000"))
 
