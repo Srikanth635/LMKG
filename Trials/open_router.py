@@ -21,8 +21,8 @@ response = requests.post(
         "Content-Type": "application/json"
     },
     data=json.dumps({
-        # "model": "openai/gpt-oss-20b",
-        "model":"openai/gpt-oss-120b",
+        # "model": "openai/gpt-oss-20b","qwen/qwen3-coder",openai/gpt-oss-120b
+        "model":"qwen/qwen3-235b-a22b-thinking-2507",
         "messages": [
             {
                 "role": "user",
@@ -34,7 +34,7 @@ response = requests.post(
 )
 json_res = response.json()
 
-print(think_remover(json_res.get("choices")[0].get("message").get("content")))
+print(json_res)
 
 # with open("openrouter_response.txt",'w') as f:
 #     json_res = response.json()

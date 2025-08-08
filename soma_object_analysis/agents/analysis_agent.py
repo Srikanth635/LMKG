@@ -4,9 +4,12 @@ LangGraph-based object analysis agent (synchronous version)
 
 from datetime import datetime
 from typing import Optional
-
+import os
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_ollama import ChatOllama
+from dotenv import load_dotenv
+load_dotenv()
+
 
 try:
     from langgraph.graph import StateGraph, END
@@ -46,8 +49,16 @@ class LangGraphAnalysisAgent(AnalysisAgent):
             # )
             # self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="function_calling")
 
-            self.llm = ChatOllama(model="gpt-oss:20b", temperature=0.5)
-            self.structured_llm = self.llm.with_structured_output(ObjectDescription, method="json_schema")
+            ollama_turbo_api_key = os.getenv('OLLAMA_TURBO_API_KEY', "")
+            client_kw_args = {
+                    # "host": "https://ollama.com",
+                    "headers": {'Authorization': ollama_turbo_api_key}
+                }
+            self.llm = ChatOllama(model='gpt-oss:120b',client_kwargs=client_kw_args,base_url="https://ollama.com",extract_reasoning=True)
+            self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
+
+            # self.llm = ChatOllama(model="gpt-oss:20b", temperature=0.5, extract_reasoning=True)
+            # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_mode")
 
             # self.llm = GcpChatOllama(model="qwen3:14b", temperature=0.4)
             # self.structured_llm = self.llm.with_structured_output(ObjectDescription,method="json_schema")
